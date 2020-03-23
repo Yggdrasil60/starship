@@ -18,14 +18,12 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-client.on('disconnect', () => {
-  client.destroy().then(client.login(tokenDiscord));
-});
 
+// Command listener
 client.on('message', message => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).split(/ +/);
+	const args = message.content.slice(config.prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 if (!client.commands.has(commandName)) return;
@@ -34,7 +32,7 @@ const command = client.commands.get(commandName);
 if (command.args && !args.length)  {
 	let reply = `Missing arguments`;
 	if (command.usage) {
-		reply+= `\nCorrect usage is : \`${prefix}${command.name} ${command.usage}\``;
+		reply+= `\nCorrect usage is : \`${config.prefix}${command.name} ${command.usage}\``;
 	}
 	return message.channel.send(reply);
 }
@@ -47,5 +45,9 @@ try {
 
 });
 
+// Log again if the bot is disconnected
+client.on('disconnect', () => {
+  client.destroy().then(client.login(tokenDiscord));
+});
 
 client.login(config.token);
