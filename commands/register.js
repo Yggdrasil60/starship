@@ -4,7 +4,7 @@ module.exports = {
 
 		//If the user does not exist within the database, it is registered with 10k starting money
 
-		const dal = require('../db_init.js');
+		const dal = require('../db_model.js');
 
 		let user;
 
