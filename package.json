@@ -1,0 +1,24 @@
+{
+  "name": "starship",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yggdrasil60/starship.git"
+  },
+  "author": "Yggdrasil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yggdrasil60/starship/issues"
+  },
+  "homepage": "https://github.com/Yggdrasil60/starship#readme",
+  "dependencies": {
+    "discord.js": "^12.0.2",
+    "sequelize": "^5.21.5",
+    "sqlite3": "^4.1.1"
+  }
+}
