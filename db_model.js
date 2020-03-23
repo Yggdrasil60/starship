@@ -29,10 +29,34 @@ User.init({
 	timestamps: false
 });
 
-// Spaceship generator
-class Generator extends Model{}
+// Spaceship model
+class ShipModel extends Model{}
 
-Generator.init({
+ShipModel.init({
+	id: {
+		type: Sequelize.INTEGER,
+		primaryKey: true,
+		autoIncrement: true
+	},
+	name: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
+	weaponsSlots: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		defaultValue: 2
+	}
+}, {
+	sequelize,
+	modelName: "shipModel",
+	timestamps: false
+});
+
+// Spaceship Reactor
+class Reactor extends Model{}
+
+Reactor.init({
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -46,13 +70,13 @@ Generator.init({
 		type: Sequelize.INTEGER,
 		allowNull: false
 	},
-	price: {
+	basePrice: {
 		type: Sequelize.INTEGER,
 		allowNull: false
 	}
 }, {
 	sequelize,
-	modelName: "generator",
+	modelName: "reactor",
 	timestamps: false
 });
 
@@ -65,10 +89,17 @@ Spaceship.init({
 		primaryKey: true,
 		autoIncrement: true
 	},
-	generatorID: {
+	shipModelID: {
 		type: Sequelize.INTEGER,
 		references: {
-			model: Generator,
+			model: ShipModel,
+			key: "id"
+		}
+	},
+	ReactorID: {
+		type: Sequelize.INTEGER,
+		references: {
+			model: Reactor,
 			key: "id"
 		}
 	}
@@ -84,5 +115,5 @@ sequelize.sync();
 // Exports
 exports.sequelize = sequelize;
 exports.User = User;
-exports.Generator = Generator;
+exports.Reactor = Reactor;
 exports.Spaceship = Spaceship;
